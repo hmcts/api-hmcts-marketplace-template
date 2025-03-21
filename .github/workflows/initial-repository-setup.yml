@@ -1,0 +1,115 @@
+name: Initial Repository Setup (One-Time Setup)
+description: |
+  This workflow and .github/rulesets can be deleted after the initial setup is complete.
+  It enables several repository settings and features that are recommended for new repositories.
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  enable-auto-delete-branch:
+    runs-on: ubuntu-latest
+    if: github.event.repository.created == true
+
+    steps:
+      - name: Enable auto-delete merged branches
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Enabling delete_branch_on_merge for $REPO"
+          gh api \
+            -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            /repos/$REPO \
+            -f delete_branch_on_merge=true
+
+  enable-private-vuln-reporting:
+    runs-on: ubuntu-latest
+    if: github.event.repository.created == true
+    needs: enable-auto-delete-branch
+
+    steps:
+      - name: Enable private vulnerability reporting
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Enabling private vulnerability reporting for $REPO"
+          gh api \
+            -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            /repos/$REPO \
+            -f security_and_analysis.private_vulnerability_reporting.enabled=true
+
+  enable-dependabot:
+    runs-on: ubuntu-latest
+    if: github.event.repository.created == true
+    needs: enable-private-vuln-reporting
+
+    steps:
+      - name: Enable Dependabot for Actions and grouped updates
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Enabling Dependabot for GitHub Actions and grouped updates for $REPO"
+
+          # Enable grouped updates (via updates API)
+          gh api \
+            -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/dependabot/updates \
+            -f updates='[
+              {
+                "package-ecosystem": "github-actions",
+                "directory": "/",
+                "schedule": {"interval": "weekly"},
+                "groups": {
+                  "actions": {
+                    "patterns": ["*"],
+                    "update-types": ["security", "version-update:semver-major"]
+                  }
+                }
+              }
+            ]'
+
+          # Enable security updates (via PATCH)
+          gh api \
+            -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            /repos/$REPO \
+            -f security_and_analysis.dependabot_security_updates.enabled=true
+
+  apply-ruleset:
+    runs-on: ubuntu-latest
+    if: github.event.repository.created == true
+    needs: enable-dependabot
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Apply ruleset from .github/rulesets/master.json
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "Applying ruleset from .github/rulesets/master.json to $REPO"
+
+          # Extract org and repo name
+          ORG_NAME=$(echo "$REPO" | cut -d'/' -f1)
+          REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
+
+          # Replace the 'source' field with the current repo path
+          jq --arg repo "$REPO" '.source = $repo' .github/rulesets/master.json > tmp_ruleset.json
+
+          # Apply the ruleset
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/rulesets \
+            --input tmp_ruleset.json
