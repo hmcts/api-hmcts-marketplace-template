@@ -3,7 +3,7 @@
 Naming conventions will follow the pattern of generic to specific. For example, an API schema definition would be in the format of:
 
 ```
-api-cp-{case-type}-{product-domain}-{name-of-entity}
+api-cp-[case-type]-{product-domain}-{name-of-entity}
 ```
 The optional _case-type_ parameter could be:
 
