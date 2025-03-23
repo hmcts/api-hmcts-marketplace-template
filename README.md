@@ -1,11 +1,18 @@
-# api-cp-template
+# API-CP Template Repository
 
-Naming conventions will follow the pattern of generic to specific. For example, an API schema definition would be in the format of:
+This is a template repository for Common Platform APIs in HMCTS. It defines the naming conventions, structure, and validation tooling for OpenAPI specifications.
+
+## Naming Convention
+
+> NOTE: Avoid using terms like `common, core, base, utils, helpers, misc, or shared`.
+> These names often allow for ambiguous ownership and quickly become black holes where cohesion goes to die.
+
+Repository names follow a pattern from generic to specific:
 
 ```
 api-cp-[case-type]-{product-domain}-{name-of-entity}
 ```
-The optional _case-type_ parameter could be:
+The optional `case-type` parameter could be:
 
 * civil 
 * crime 
@@ -14,25 +21,33 @@ The optional _case-type_ parameter could be:
 
 HMCTS manages all Civil, Criminal, Family (separate from civil), and Tribunal cases.
 
+### Reference Data Repositories
 
-## GitHub Action OpenAPI Validator
+Reference data APIs use the following naming format:
 
-The `validate` action uses the OpenAPI Schema provided via the environment variable `OAPI_SCHEMA_URL` or defaults to `https://raw.githubusercontent.com/OAI/OpenAPI-Specification/refs/tags/3.1.1/schemas/v3.0/schema.yaml`
+```
+api-cp-refdata-{product-domain}-{name-of-entity}
+```
+Some might argue that `product-domain` should be optional for reference data, placing it under global ownership. But global ownership often means no ownership — and no accountability. Therefore, `product-domain` is **required**.
 
-### Run validation locally
+## OpenAPI Specification Validation
 
-It is assumed that python is installed on your machine.
+This repository includes a GitHub Action to validate OpenAPI specifications. The schema is sourced via the environment variable `OAPI_SCHEMA_URL`, or defaults to the official 3.1 schema.
 
-Install the required dependencies by running the following command:
+### Run Validation Locally
+
+> Python must be installed on your machine.
+
+Install dependencies:
 ```bash
-  pip install -r .github/scripts/requirements.txt
+pip install -r .github/scripts/requirements.txt
 ```
 
-Run the following command to validate the OpenAPI specification:
+Validate the OpenAPI specification:
 ```bash
 python ./.github/scripts/validate_openapi.py ./openapi
 ```
-or to test the validation script run:
+Or test with example files:
 ```bash
 python ./.github/scripts/validate_openapi.py ./.github/examples
 ```
