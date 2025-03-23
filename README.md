@@ -53,3 +53,23 @@ Or test with example files:
 ```bash
 python ./.github/scripts/validate_openapi.py ./.github/examples
 ```
+
+## Post-Template Cleanup
+
+After using this template to create your repository, the following files are no longer needed and **should be deleted**:
+
+- `.github/examples/invalid-openapi-spec.yml`
+- `.github/examples/test-openapi-spec.yml`
+
+The following file is used to import a repository ruleset.  
+Once the ruleset has been successfully imported via GitHub Settings, this file **should be deleted**:
+
+- `.github/rulesets/master.json`
+
+To import the ruleset, follow GitHub’s instructions here:  
+👉 [Importing a ruleset](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository#importing-a-ruleset)
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
