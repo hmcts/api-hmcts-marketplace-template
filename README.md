@@ -2,6 +2,12 @@
 
 This is a template repository for Common Platform APIs in HMCTS. It defines the naming conventions, structure, and validation tooling for OpenAPI specifications.
 
+# API-CP Template Repository
+
+This is a template repository for Common Platform APIs in HMCTS. It defines naming conventions, structure, and validation tooling for OpenAPI specifications.
+
+> 🔗 API definitions should follow the [HMCTS RESTful API Standards](https://hmcts.github.io/restful-api-standards/).
+
 ## Naming Convention
 
 > NOTE: Avoid using terms like `common, core, base, utils, helpers, misc, or shared`.
