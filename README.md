@@ -59,8 +59,11 @@ python ./.github/scripts/validate_openapi.py ./.github/examples
 
 After using this template to create your repository, the following files are no longer needed and **should be deleted**:
 
+- `./APIVERSIONING.md`
 - `.github/examples/invalid-openapi-spec.yml`
 - `.github/examples/test-openapi-spec.yml`
+
+Update the `./README.md` to reflect the context of the new created repository
 
 The following file is used to import a repository ruleset.  
 Once the ruleset has been successfully imported via GitHub Settings, this file **should be deleted**:
