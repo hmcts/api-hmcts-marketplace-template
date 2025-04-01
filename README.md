@@ -44,8 +44,6 @@ Some might argue that `product-domain` should be optional for reference data, pl
   
 Once the ruleset has been successfully imported via GitHub Settings, the new repository no longer requires `.github/rulesets/master.json` so it **should be deleted**:
 
-
-
 ### Clean Up
 
 After using this template to create your repository, the following files are no longer needed and **should be deleted**:
@@ -54,6 +52,7 @@ After using this template to create your repository, the following files are no 
 - `./openapi/deleteme`
 
 Update the `./README.md` to reflect the context of the new created repository
+
 
 ## OpenAPI Specification and Data Schema Validation
 
@@ -72,6 +71,7 @@ Validate the OpenAPI specification:
 ```bash
 spectral lint "openapi/**/*.{yml,yaml}"
 ```
+Documentation: https://stoplight.io/open-source/spectral
 
 Validate the data payload JSON Schemas:
 ```bash
@@ -82,6 +82,7 @@ Validate the data payload JSON Schemas:
 ```bash
 ajv --spec=draft2020 --strict=false -s "./openapi/path/to/schema.json" -d "./openapi/path/to/example_payload.json"
 ```
+Documentation: https://ajv.js.org/
 
 ## License
 
