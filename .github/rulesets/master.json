@@ -1,9 +1,9 @@
 {
-  "id": 4228719,
+  "id": 4327583,
   "name": "master",
   "target": "branch",
   "source_type": "Repository",
-  "source": "hmcts/api-cp-crime-schedulingandlisting-courtschedule",
+  "source": "hmcts/api-cp-refdata-courthearing-judges",
   "enforcement": "active",
   "conditions": {
     "ref_name": {
@@ -28,6 +28,7 @@
         "require_code_owner_review": false,
         "require_last_push_approval": false,
         "required_review_thread_resolution": false,
+        "automatic_copilot_code_review_enabled": false,
         "allowed_merge_methods": [
           "merge",
           "squash",
@@ -42,7 +43,7 @@
         "do_not_enforce_on_create": false,
         "required_status_checks": [
           {
-            "context": "validate",
+            "context": "lint",
             "integration_id": 15368
           }
         ]
