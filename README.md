@@ -33,45 +33,55 @@ api-cp-refdata-{product-domain}-{name-of-entity}
 ```
 Some might argue that `product-domain` should be optional for reference data, placing it under global ownership. But global ownership often means no ownership — and no accountability. Therefore, `product-domain` is **required**.
 
-## OpenAPI Specification Validation
+## Post-Template Manual Steps
 
-This repository includes a GitHub Action to validate OpenAPI specifications. The schema is sourced via the environment variable `OAPI_SCHEMA_URL`, or defaults to the official 3.1 schema.
+### Setup
 
-### Run Validation Locally
+* Go to settings of the repository -> General -> check "Automatically delete head branches"
+* Import the ruleset `.github/rulesets/master.json`  
+  To import the ruleset, follow GitHub’s instructions here:  
+  👉 [Importing a ruleset](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository#importing-a-ruleset)
+  
+Once the ruleset has been successfully imported via GitHub Settings, the new repository no longer requires `.github/rulesets/master.json` so it **should be deleted**:
 
-> Python must be installed on your machine.
 
-Install dependencies:
-```bash
-pip install -r .github/scripts/requirements.txt
-```
 
-Validate the OpenAPI specification:
-```bash
-python ./.github/scripts/validate_openapi.py ./openapi
-```
-Or test with example files:
-```bash
-python ./.github/scripts/validate_openapi.py ./.github/examples
-```
-
-## Post-Template Cleanup
+### Clean Up
 
 After using this template to create your repository, the following files are no longer needed and **should be deleted**:
 
 - `./APIVERSIONING.md`
-- `.github/examples/invalid-openapi-spec.yml`
-- `.github/examples/test-openapi-spec.yml`
+- `./openapi/deleteme`
 
 Update the `./README.md` to reflect the context of the new created repository
 
-The following file is used to import a repository ruleset.  
-Once the ruleset has been successfully imported via GitHub Settings, this file **should be deleted**:
+## OpenAPI Specification and Data Schema Validation
 
-- `.github/rulesets/master.json`
+This repository includes a GitHub Action to validate OpenAPI specifications and data payload JSON Schemas.
 
-To import the ruleset, follow GitHub’s instructions here:  
-👉 [Importing a ruleset](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository#importing-a-ruleset)
+### Run Validation Locally
+
+> Node must be installed on your machine.
+
+Install dependencies:
+```bash
+npm install -g @stoplight/spectral-cli ajv-cli jsonlint
+```
+
+Validate the OpenAPI specification:
+```bash
+spectral lint "openapi/**/*.{yml,yaml}"
+```
+
+Validate the data payload JSON Schemas:
+```bash
+jsonlint -q ./openapi/path/to/example_payload.json
+```
+
+Validate the data payload JSON Schemas:
+```bash
+ajv --spec=draft2020 --strict=false -s "./openapi/path/to/schema.json" -d "./openapi/path/to/example_payload.json"
+```
 
 ## License
 
