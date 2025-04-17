@@ -49,7 +49,7 @@ Once the ruleset has been successfully imported via GitHub Settings, the new rep
 After using this template to create your repository, the following files are no longer needed and **should be deleted**:
 
 - `./APIVERSIONING.md`
-- `./openapi/deleteme`
+- `./src/main/resources/openapi/deleteme`
 
 Update the `./README.md` to reflect the context of the new created repository
 
