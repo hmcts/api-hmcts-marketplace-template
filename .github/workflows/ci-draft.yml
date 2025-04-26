@@ -56,7 +56,7 @@ jobs:
           FILE=$(find "${FILE_PATH_OPENAPI}" -name "*.openapi.yml" | head -n 1)
           if [ -z "$FILE" ]; then
             echo "⚠️ *** No OpenAPI spec (*.openapi.yml) found. Skipping publishing draft. ***"
-            exit 0
+            exit 1
           fi
           echo "openapi_file=$FILE" >> $GITHUB_OUTPUT
 
