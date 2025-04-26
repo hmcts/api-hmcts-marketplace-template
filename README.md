@@ -3,7 +3,7 @@
 This is a template repository for Common Platform (CP) APIs in HMCTS. It defines naming conventions, structure, and validation tooling for OpenAPI specifications.
 
 > 🔗 API definitions should follow the [HMCTS RESTful API Standards](https://hmcts.github.io/restful-api-standards/).  
-> 📘 See [APIVERSIONING.md](./APIVERSIONING.md) for our CP API versioning strategy based on media types and SemVer.
+> 📘 See [APIVERSIONING.md](./docs/API-VERSIONING-STRATEGY.md) for our CP API versioning strategy based on media types and SemVer.
 
 ## Naming Convention
 
@@ -48,41 +48,16 @@ Once the ruleset has been successfully imported via GitHub Settings, the new rep
 
 After using this template to create your repository, the following files are no longer needed and **should be deleted**:
 
-- `./APIVERSIONING.md`
+- `./docs/*`
 - `./src/main/resources/openapi/deleteme`
 
 Update the `./README.md` to reflect the context of the new created repository
 
+## Supporting Documents
 
-## OpenAPI Specification and Data Schema Validation
+Further documentation can be found in the [docs](./docs) directory.
 
-This repository includes a GitHub Action to validate OpenAPI specifications and data payload JSON Schemas.
-
-### Run Validation Locally
-
-> Node must be installed on your machine.
-
-Install dependencies:
-```bash
-npm install -g @stoplight/spectral-cli ajv-cli jsonlint
-```
-
-Validate the OpenAPI specification:
-```bash
-spectral lint "openapi/**/*.{yml,yaml}"
-```
-Documentation: https://stoplight.io/open-source/spectral
-
-Validate the data payload JSON Schemas:
-```bash
-jsonlint -q ./openapi/path/to/example_payload.json
-```
-
-Validate the data payload JSON Schemas:
-```bash
-ajv --spec=draft2020 --strict=false -s "./openapi/path/to/schema.json" -d "./openapi/path/to/example_payload.json"
-```
-Documentation: https://ajv.js.org/
+> **Note** the build requires secrets and variables to be available in project settings see [GitHub Actions: Required Secrets and Variables](./docs/GITHUB-ACTIONS.md)
 
 ## License
 
