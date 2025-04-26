@@ -46,10 +46,10 @@ jobs:
         env:
           FILE_PATH_OPENAPI: "src/main/resources/openapi"
         run: |
-          FILE=$(find ${FILE_PATH_OPENAPI} -name "*.openapi.yml" | head -n 1)
+          FILE=$(find "${FILE_PATH_OPENAPI}" -name "*.openapi.yml" | head -n 1 || true)
           if [ -z "$FILE" ]; then
             echo "⚠️ *** No OpenAPI spec (*.openapi.yml) found. Skipping publishing draft. ***"
-            exit 1
+            exit 0
           fi
           echo "openapi_file=$FILE" >> $GITHUB_OUTPUT
 
