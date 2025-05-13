@@ -65,6 +65,14 @@
           {
             "context": "validate-openapi-links",
             "integration_id": 15368
+          },
+          {
+            "context": "Analyze (java)",
+            "integration_id": 15368
+          },
+          {
+            "context": "pmd-analysis",
+            "integration_id": 15368
           }
         ]
       }
