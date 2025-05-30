@@ -21,10 +21,10 @@ class OpenAPIConfigurationLoaderTest {
 
         Info info = openAPI.getInfo();
         assertNotNull(info);
-        assertEquals("API CP Refdata Court Hearing Judges", info.getTitle());
-        assertEquals("Reference Data API providing information on Judges associated with a Court Hearing", info.getDescription());
+        assertEquals("Common Platform API", info.getTitle());
+        assertEquals("API description", info.getDescription());
 
-        String apiGitHubRepository = "api-cp-refdata-courthearing-judges";
+        String apiGitHubRepository = "api-cp-crime-courthearing-cases";
         String expectedVersion = System.getProperty("API_SPEC_VERSION", "0.0.0");
         log.info("API version set to: {}", expectedVersion);
 
