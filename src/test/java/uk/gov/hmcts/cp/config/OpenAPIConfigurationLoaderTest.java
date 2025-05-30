@@ -24,7 +24,7 @@ class OpenAPIConfigurationLoaderTest {
         assertEquals("Common Platform API", info.getTitle());
         assertEquals("API description", info.getDescription());
 
-        String apiGitHubRepository = "api-cp-results";
+        String apiGitHubRepository = "api-cp-template";
         String expectedVersion = System.getProperty("API_SPEC_VERSION", "0.0.0");
         log.info("API version set to: {}", expectedVersion);
 
