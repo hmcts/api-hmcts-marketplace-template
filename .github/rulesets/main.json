@@ -1,6 +1,6 @@
 {
   "id": 5081508,
-  "name": "master",
+  "name": "main",
   "target": "branch",
   "source_type": "Repository",
   "source": "hmcts/api-cp-refdata-courthearing-judges",
@@ -43,7 +43,19 @@
         "do_not_enforce_on_create": false,
         "required_status_checks": [
           {
-            "context": "Build",
+            "context": "Analyze (java)",
+            "integration_id": 15368
+          },
+          {
+            "context": "pmd-analysis",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test - Java 21",
+            "integration_id": 15368
+          },
+          {
+            "context": "Test - Java 23",
             "integration_id": 15368
           },
           {
@@ -56,22 +68,6 @@
           },
           {
             "context": "spectral-lint",
-            "integration_id": 15368
-          },
-          {
-            "context": "Update-Spec-Version",
-            "integration_id": 15368
-          },
-          {
-            "context": "validate-openapi-links",
-            "integration_id": 15368
-          },
-          {
-            "context": "Analyze (java)",
-            "integration_id": 15368
-          },
-          {
-            "context": "pmd-analysis",
             "integration_id": 15368
           }
         ]
