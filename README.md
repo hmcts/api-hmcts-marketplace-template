@@ -66,11 +66,11 @@ The [`docs`](./docs) directory includes supporting information for the repositor
 ### Setup
 
 * Go to settings of the repository -> General -> check "Automatically delete head branches"
-* Import the ruleset `.github/rulesets/master.json`  
+* Import the ruleset `.github/rulesets/main.json`  
   To import the ruleset, follow GitHub’s instructions here:  
   👉 [Importing a ruleset](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/managing-rulesets-for-a-repository#importing-a-ruleset)
   
-Once the ruleset has been successfully imported via GitHub Settings, the new repository no longer requires `.github/rulesets/master.json` so it **should be deleted**:
+Once the ruleset has been successfully imported via GitHub Settings, the new repository no longer requires `.github/rulesets/main.json` so it **should be deleted**:
 
 ### Clean Up
 
@@ -81,6 +81,9 @@ After using this template to create your repository, the following files are no 
 
 Update the `./README.md` to reflect the context of the new created repository
 
+### Contribute to This Repository
+
+Contributions are welcome! Please see the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file for guidelines.
 
 ## License
 
