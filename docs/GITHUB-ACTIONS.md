@@ -17,16 +17,6 @@
 
 [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically) is configured to automatically merge dependency update PRs after all required checks pass. This ensures dependencies remain up to date with minimal manual intervention while maintaining code security and stability.
 
-## 🔒 Required Secrets and Variables
-
-Ensure the following secrets are configured in your GitHub repository:
-
-| Secret/Variable Name  | Description                                 |
-|-----------------------|---------------------------------------------|
-| `APIHUB_API_KEY`  | API token for authenticating with SwaggerHub |
-| `APIHUB_ORGANISATION` | SwaggerHub username or organisation name    |
-
-
 ## OpenAPI Specification and Data Schema Validation
 
 This repository includes a GitHub Action to validate OpenAPI specifications and data payload JSON Schemas.
