@@ -15,7 +15,7 @@ class OpenAPIObjectMappingTest {
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
     @Test
-    void json_should_map_to_AnswerResponse_object() throws Exception {
+    void json_should_map_to_Response_object() throws Exception {
         String json = "{" +
                 "    \"results\": [" +
                 "        {" +
